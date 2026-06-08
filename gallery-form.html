@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カフェ・ド・シュロ ギャラリー 利用申し込み</title>
+<style>
+  :root { --bg:#f7f4ef; --card:#fff; --ink:#3a342c; --accent:#a87f4f; --line:#e3ddd2; }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; padding:24px 16px;
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    line-height:1.6;
+  }
+  .card {
+    max-width:480px; margin:0 auto;
+    background:var(--card); border-radius:14px;
+    padding:28px 22px; box-shadow:0 2px 16px rgba(0,0,0,.06);
+  }
+  h1 { font-size:1.25rem; margin:0 0 6px; }
+  .lead { font-size:.9rem; color:#7a7264; margin:0 0 22px; }
+  label { display:block; font-size:.88rem; font-weight:600; margin:16px 0 6px; }
+  .req { color:var(--accent); font-size:.78rem; margin-left:4px; }
+  input, select, textarea {
+    width:100%; padding:11px 12px; font-size:1rem;
+    border:1px solid var(--line); border-radius:8px;
+    background:#fff; color:var(--ink); font-family:inherit;
+  }
+  input:focus, select:focus, textarea:focus { outline:2px solid var(--accent); border-color:transparent; }
+  textarea { min-height:90px; resize:vertical; }
+  .row { display:flex; gap:10px; }
+  .row > div { flex:1; }
+  button {
+    width:100%; margin-top:24px; padding:14px;
+    font-size:1rem; font-weight:700; color:#fff;
+    background:var(--accent); border:none; border-radius:8px; cursor:pointer;
+  }
+  button:disabled { opacity:.5; }
+  #done { display:none; text-align:center; padding:30px 10px; }
+  #done h2 { color:var(--accent); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div id="formArea">
+      <h1>カフェ・ド・シュロ ギャラリー<br>利用申し込み</h1>
+      <p class="lead">下記をご記入のうえ送信してください。<br>受付後、自動返信メールが届きます。</p>
+
+      <form id="form">
+        <label>お名前<span class="req">必須</span></label>
+        <input type="text" name="name" required>
+
+        <label>メールアドレス<span class="req">必須</span></label>
+        <input type="email" name="email" required>
+
+        <label>電話番号</label>
+        <input type="tel" name="phone">
+
+        <label>展示のジャンル</label>
+        <select name="genre">
+          <option value="">選択してください</option>
+          <option>絵画</option>
+          <option>写真</option>
+          <option>イラスト</option>
+          <option>立体・クラフト</option>
+          <option>その他</option>
+        </select>
+
+        <div class="row">
+          <div>
+            <label>希望開始日<span class="req">必須</span></label>
+            <input type="date" name="startDate" required>
+          </div>
+          <div>
+            <label>希望終了日</label>
+            <input type="date" name="endDate">
+          </div>
+        </div>
+
+        <label>展示内容・ご要望</label>
+        <textarea name="message" placeholder="作品の内容や希望などをご記入ください"></textarea>
+
+        <button type="submit" id="btn">送信する</button>
+      </form>
+    </div>
+
+    <div id="done">
+      <h2>送信しました</h2>
+      <p>お申し込みありがとうございました。<br>確認メールをお送りしましたのでご確認ください。</p>
+    </div>
+  </div>
+
+<script>
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwnY0Qx7f6eKW4DARvn-mDq-mmHIzvuP0iLwGSwrwGX8E8KQSj2Z1kZlWirYrrygpfr/exec';
+
+  document.getElementById('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn');
+    btn.disabled = true; btn.textContent = '送信中…';
+
+    const f = e.target;
+    const data = {
+      name: f.name.value, email: f.email.value, phone: f.phone.value,
+      genre: f.genre.value, startDate: f.startDate.value,
+      endDate: f.endDate.value, message: f.message.value
+    };
+
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      });
+      document.getElementById('formArea').style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+    } catch (err) {
+      btn.disabled = false; btn.textContent = '送信する';
+      alert('送信に失敗しました。お手数ですが時間をおいて再度お試しください。');
+    }
+  });
+</script>
+</body>
+</html>
