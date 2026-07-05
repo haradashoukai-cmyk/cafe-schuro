@@ -3,49 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>カフェ・ド・シュロ ギャラリー 利用申し込み</title>
+<title>カフェ・ド・シュロ ギャラリー ご利用希望・お問い合わせ</title>
 <style>
-  :root { --bg:#f7f4ef; --card:#fff; --ink:#3a342c; --accent:#a87f4f; --line:#e3ddd2; }
+  :root { --bg:#f7f4ef; --card:#fff; --ink:#3a342c; --sub:#7a7264; --accent:#a87f4f; --line:#e3ddd2; --accent-d:#8a6638; }
   * { box-sizing: border-box; }
   body {
-    margin:0; padding:24px 16px;
+    margin:0; padding:0;
     background:var(--bg); color:var(--ink);
     font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
-    line-height:1.6;
+    line-height:1.7;
   }
-  .card {
-    max-width:480px; margin:0 auto;
-    background:var(--card); border-radius:14px;
-    padding:28px 22px; box-shadow:0 2px 16px rgba(0,0,0,.06);
-  }
-  h1 { font-size:1.25rem; margin:0 0 6px; }
-  .lead { font-size:.9rem; color:#7a7264; margin:0 0 22px; }
+  .wrap { max-width:560px; margin:0 auto; padding:20px 16px 60px; }
+  .card { background:var(--card); border-radius:14px; padding:24px 20px; box-shadow:0 2px 16px rgba(0,0,0,.06); margin-bottom:18px; }
+  h1 { font-size:1.35rem; margin:0 0 4px; }
+  h2 { font-size:1.05rem; margin:0 0 14px; color:var(--accent-d); border-bottom:2px solid var(--line); padding-bottom:6px; }
+  .lead { font-size:.9rem; color:var(--sub); margin:0; }
+  .notice { background:#f4ede3; border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:12px 14px; font-size:.86rem; color:#6a5f4d; margin:14px 0 0; }
+
+  /* photos */
+  .hero { width:100%; border-radius:12px 12px 0 0; display:block; aspect-ratio:3/2; object-fit:cover; }
+  .gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:14px; }
+  .gallery img { width:100%; border-radius:8px; aspect-ratio:3/2; object-fit:cover; display:block; }
+
+  /* venue */
+  .floor { width:100%; border-radius:8px; border:1px solid var(--line); display:block; margin:0 0 14px; background:#fff; }
+  .specs { font-size:.86rem; color:#5f574a; }
+  .specs dt { font-weight:600; color:var(--ink); margin-top:8px; }
+  .specs dd { margin:0 0 2px; }
+
+  /* fee table */
+  .fee { border-collapse:collapse; width:100%; font-size:.84rem; }
+  .fee th, .fee td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  .fee th { background:#f4ede3; white-space:nowrap; color:var(--accent-d); }
+  .terms { font-size:.82rem; color:var(--sub); margin:12px 0 0; padding-left:1.1em; }
+  .terms li { margin:3px 0; }
+
+  /* form */
   label { display:block; font-size:.88rem; font-weight:600; margin:16px 0 6px; }
   .req { color:var(--accent); font-size:.78rem; margin-left:4px; }
   input, select, textarea {
     width:100%; padding:11px 12px; font-size:1rem;
-    border:1px solid var(--line); border-radius:8px;
-    background:#fff; color:var(--ink); font-family:inherit;
+    border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink); font-family:inherit;
   }
   input:focus, select:focus, textarea:focus { outline:2px solid var(--accent); border-color:transparent; }
-  textarea { min-height:90px; resize:vertical; }
+  textarea { min-height:84px; resize:vertical; }
   .row { display:flex; gap:10px; }
   .row > div { flex:1; }
+  .hint { font-size:.78rem; color:var(--sub); margin:4px 0 0; }
   button {
-    width:100%; margin-top:24px; padding:14px;
-    font-size:1rem; font-weight:700; color:#fff;
-    background:var(--accent); border:none; border-radius:8px; cursor:pointer;
+    width:100%; margin-top:22px; padding:14px; font-size:1rem; font-weight:700;
+    color:#fff; background:var(--accent); border:none; border-radius:8px; cursor:pointer;
   }
   button:disabled { opacity:.5; }
-  #done { display:none; text-align:center; padding:30px 10px; }
-  #done h2 { color:var(--accent); }
+
+  /* calendar */
+  .cal-wrap { position:relative; width:100%; padding-top:75%; border-radius:8px; overflow:hidden; border:1px solid var(--line); }
+  .cal-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+  #done { display:none; text-align:center; padding:26px 10px; }
+  #done h2 { color:var(--accent); border:none; }
+  footer { text-align:center; font-size:.82rem; color:var(--sub); margin-top:8px; }
+  footer a { color:var(--accent-d); }
 </style>
 </head>
 <body>
+<div class="wrap">
+
+  <!-- HERO + INTRO -->
+  <div class="card" style="padding:0; overflow:hidden;">
+    <img class="hero" src="exhibition.jpg" alt="ギャラリー展示の様子">
+    <div style="padding:22px 20px;">
+      <h1>カフェ・ド・シュロ ギャラリー</h1>
+      <p class="lead">展示・イベント・お稽古・個人練習にご利用いただける多目的スペースです。グランドピアノ（スタインウェイ S-155）を備えています。</p>
+      <div class="notice">
+        このフォームは <strong>ご利用希望日の確認・お問い合わせ</strong> の受付です。送信後、スタッフが空き状況を確認し、<strong>利用規約と申込書</strong>をメールでお送りします。これだけでは予約は確定しません。
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTOS -->
+  <div class="card">
+    <h2>スペースの様子</h2>
+    <div class="gallery">
+      <img src="piano-steinway.jpg" alt="スタインウェイ S-155">
+      <img src="event-rakugo.jpg" alt="寄席・イベントの様子">
+      <img src="lesson-dance.jpg" alt="お稽古・ワークショップの様子">
+      <img src="room-wide.jpg" alt="展示室の全景">
+    </div>
+  </div>
+
+  <!-- VENUE -->
+  <div class="card">
+    <h2>会場のご案内</h2>
+    <img class="floor" src="floor-plan.png" alt="ギャラリー平面図">
+    <dl class="specs">
+      <dt>広さ・天井高</dt>
+      <dd>床面積 約31.6㎡ / 天井高 2200mm（柱間 正面6008mm・右面5200mm）</dd>
+      <dt>収容人数</dt>
+      <dd>椅子使用時 約20〜25名</dd>
+      <dt>設備</dt>
+      <dd>グランドピアノ（スタインウェイ S-155）/ LEDダウンライト20灯 / プロジェクター / CDプレーヤー・スピーカー</dd>
+      <dd>テーブル（1500×585mm）3台 / パイプ椅子 26脚 / 電力容量 30A</dd>
+      <dt>控え室</dt>
+      <dd>控え室1・控え室2（専用出入口・外出入口あり）</dd>
+    </dl>
+  </div>
+
+  <!-- FEES -->
+  <div class="card">
+    <h2>ご利用料金の目安</h2>
+    <table class="fee">
+      <tr><th>展示利用</th><td>1週間 20,000円〜（1週間以上は要相談）<br>※作品販売の場合は売上の30%</td></tr>
+      <tr><th>イベント利用</th><td>スペース代 1時間 5,000円（土日祝 +500円/h）<br>ピアノ利用なし 1時間 3,000円<br>＋ドリンク代 600円 ×人数分（最低5名〜）</td></tr>
+      <tr><th>個人利用<br>（練習）</th><td>1〜4名。スペース代 1時間 2,000円（土日祝 +500円/h）<br>ピアノ利用なし 1時間 1,000円<br>＋カフェでのご注文をお願いします</td></tr>
+    </table>
+    <ul class="terms">
+      <li>利用時間 10:00〜17:00（30分単位で延長可）</li>
+      <li>定休日（火曜・年末年始）は休館</li>
+      <li>個人利用の予約は使用日の1週間前から</li>
+      <li>キャンセル料：3日前まで無料 / 2日前50% / 前日80% / 当日100%</li>
+      <li>飲食物の持ち込み不可（水分補給を除く）/ ピアノの移動はスタッフが対応</li>
+      <li>詳しい規約は、お問い合わせ後にお送りします</li>
+    </ul>
+  </div>
+
+  <!-- AVAILABILITY CALENDAR -->
+  <div class="card">
+    <h2>空き状況</h2>
+    <p class="lead" style="margin-bottom:12px;">予定が入っている時間帯が表示されます（確定予約のみ）。空いて見える日も、お問い合わせ時点で先約がある場合があります。</p>
+    <div class="cal-wrap">
+      <iframe src="https://calendar.google.com/calendar/embed?src=609c84863913163d58db67c842172703a7a2a5018862c914e498974189cbe1f3%40group.calendar.google.com&ctz=Asia%2FTokyo&mode=WEEK&showTitle=0&showPrint=0&showTabs=1&showCalendars=0" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- FORM -->
   <div class="card">
     <div id="formArea">
-      <h1>カフェ・ド・シュロ ギャラリー<br>利用申し込み</h1>
-      <p class="lead">下記をご記入のうえ送信してください。<br>受付後、自動返信メールが届きます。</p>
+      <h2>ご利用希望・お問い合わせ</h2>
 
       <form id="form">
         <label>お名前<span class="req">必須</span></label>
@@ -57,39 +151,48 @@
         <label>電話番号</label>
         <input type="tel" name="phone">
 
-        <label>展示のジャンル</label>
-        <select name="genre">
+        <label>ご利用の種類<span class="req">必須</span></label>
+        <select name="useType" required>
           <option value="">選択してください</option>
-          <option>絵画</option>
-          <option>写真</option>
-          <option>イラスト</option>
-          <option>立体・クラフト</option>
-          <option>その他</option>
+          <option>展示利用（絵画・写真・書道・陶芸 など）</option>
+          <option>イベント利用（発表会・ライブ・映写会・お教室 など）</option>
+          <option>個人利用（個人練習・アンサンブル練習）</option>
+          <option>その他・未定</option>
         </select>
 
         <div class="row">
           <div>
-            <label>希望開始日<span class="req">必須</span></label>
-            <input type="date" name="startDate" required>
+            <label>希望開始日時<span class="req">必須</span></label>
+            <input type="datetime-local" name="startDate" required>
           </div>
           <div>
-            <label>希望終了日</label>
-            <input type="date" name="endDate">
+            <label>希望終了日時<span class="req">必須</span></label>
+            <input type="datetime-local" name="endDate" required>
           </div>
         </div>
+        <p class="hint">展示利用の場合は、開始日の開館時刻〜終了日の閉館時刻をご指定ください。</p>
 
-        <label>展示内容・ご要望</label>
-        <textarea name="message" placeholder="作品の内容や希望などをご記入ください"></textarea>
+        <label>人数</label>
+        <input type="text" name="people" placeholder="例：10名程度">
 
-        <button type="submit" id="btn">送信する</button>
+        <label>ご利用内容・ご相談など</label>
+        <textarea name="message" placeholder="展示や催しの内容、ピアノ利用の有無、ご質問などをご記入ください"></textarea>
+
+        <button type="submit" id="btn">この内容で問い合わせる</button>
       </form>
     </div>
 
     <div id="done">
       <h2>送信しました</h2>
-      <p>お申し込みありがとうございました。<br>確認メールをお送りしましたのでご確認ください。</p>
+      <p>ご利用希望を承りました。<br>スタッフが空き状況を確認のうえ、利用規約と申込書をメールでお送りします。<br>確認の自動返信メールもお送りしましたのでご確認ください。</p>
     </div>
   </div>
+
+  <footer>
+    カフェ・ド・シュロ ギャラリー　☎ 044-953-5436<br>
+    <a href="mailto:cafe.do.shuro@gmail.com">cafe.do.shuro@gmail.com</a>
+  </footer>
+</div>
 
 <script>
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbwnY0Qx7f6eKW4DARvn-mDq-mmHIzvuP0iLwGSwrwGX8E8KQSj2Z1kZlWirYrrygpfr/exec';
@@ -102,21 +205,21 @@
     const f = e.target;
     const data = {
       name: f.name.value, email: f.email.value, phone: f.phone.value,
-      genre: f.genre.value, startDate: f.startDate.value,
-      endDate: f.endDate.value, message: f.message.value
+      useType: f.useType.value, startDate: f.startDate.value, endDate: f.endDate.value,
+      people: f.people.value, message: f.message.value
     };
 
     try {
       await fetch(GAS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(data)
       });
       document.getElementById('formArea').style.display = 'none';
       document.getElementById('done').style.display = 'block';
+      document.getElementById('done').scrollIntoView({behavior:'smooth', block:'center'});
     } catch (err) {
-      btn.disabled = false; btn.textContent = '送信する';
+      btn.disabled = false; btn.textContent = 'この内容で問い合わせる';
       alert('送信に失敗しました。お手数ですが時間をおいて再度お試しください。');
     }
   });
