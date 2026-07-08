@@ -146,6 +146,9 @@
         <label>お名前<span class="req">必須</span></label>
         <input type="text" name="name" required>
 
+        <label>フリガナ<span class="req">必須</span></label>
+        <input type="text" name="kana" placeholder="例：シュロ タロウ" required>
+
         <label>メールアドレス<span class="req">必須</span></label>
         <input type="email" name="email" required>
 
@@ -205,7 +208,7 @@
 
     const f = e.target;
     const data = {
-      name: f.name.value, email: f.email.value, phone: f.phone.value,
+      name: f.name.value, kana: f.kana.value, email: f.email.value, phone: f.phone.value,
       useType: f.useType.value, startDate: f.startDate.value, endDate: f.endDate.value,
       people: f.people.value, message: f.message.value
     };
