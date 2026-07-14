@@ -56,6 +56,22 @@
   }
   button:disabled { opacity:.5; }
 
+  /* 下見トグル */
+  .shitami { margin:18px 0 0; }
+  .shitami-btn {
+    display:flex; align-items:center; gap:10px; margin:0;
+    padding:12px 14px; border:1.5px solid var(--line); border-radius:8px;
+    background:#fff; color:var(--ink); font-weight:600; font-size:.9rem; cursor:pointer;
+  }
+  .shitami-btn .box {
+    width:20px; height:20px; flex:none; border:1.5px solid var(--sub); border-radius:5px;
+    display:flex; align-items:center; justify-content:center; font-size:.72rem; color:transparent;
+  }
+  #shitamiCheck:checked + .shitami-btn { border-color:var(--accent); background:#f4ede3; color:var(--accent-d); }
+  #shitamiCheck:checked + .shitami-btn .box { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .shitami-field { display:none; }
+  #shitamiCheck:checked ~ .shitami-field { display:block; }
+
   /* calendar */
   .cal-wrap { position:relative; width:100%; padding-top:75%; border-radius:8px; overflow:hidden; border:1px solid var(--line); }
   .cal-wrap iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
@@ -154,6 +170,15 @@
         <label>電話番号</label>
         <input type="tel" name="phone">
 
+        <div class="shitami">
+          <input type="checkbox" name="shitami" id="shitamiCheck" hidden>
+          <label for="shitamiCheck" class="shitami-btn"><span class="box">✓</span><span>まず下見を希望する（ご利用前に会場を見学）</span></label>
+          <div class="shitami-field">
+            <label>下見のご希望（候補日時・ご質問など）</label>
+            <textarea name="shitamiText" placeholder="下見をご希望の候補日時や、当日に確認したい点などをご記入ください"></textarea>
+          </div>
+        </div>
+
         <label>ご利用の種類<span class="req">必須</span></label>
         <select name="useType" required>
           <option value="">選択してください</option>
@@ -208,6 +233,7 @@
     const f = e.target;
     const data = {
       name: f.name.value, kana: f.kana.value, email: f.email.value, phone: f.phone.value,
+      shitami: f.shitami.checked, shitamiText: f.shitamiText.value,
       useType: f.useType.value, startDate: f.startDate.value, endDate: f.endDate.value,
       people: f.people.value, message: f.message.value
     };
