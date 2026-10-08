@@ -20,13 +20,23 @@
   .lead { font-size:.9rem; color:var(--sub); margin:0; }
   .notice { background:#f4ede3; border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:12px 14px; font-size:.86rem; color:#6a5f4d; margin:14px 0 0; }
 
+
+  /* top bar */
+  html { scroll-behavior:smooth; }
+  .topbar { position:sticky; top:0; z-index:50; background:rgba(247,244,239,.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .topbar-in { max-width:560px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand { font-weight:700; color:var(--ink); text-decoration:none; font-size:.92rem; line-height:1.3; }
+  .cta { flex:none; background:var(--accent); color:#fff; text-decoration:none; font-weight:700; font-size:.86rem; padding:8px 16px; border-radius:999px; box-shadow:0 2px 8px rgba(168,127,79,.3); }
+  .cta:hover { background:var(--accent-d); }
+  #apply { scroll-margin-top:64px; }
+
   /* photos */
-  .hero { width:100%; border-radius:12px 12px 0 0; display:block; aspect-ratio:3/2; object-fit:cover; }
+  .hero { width:100%; height:auto; border-radius:12px 12px 0 0; display:block; aspect-ratio:3/2; object-fit:cover; }
   .gallery { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:14px; }
-  .gallery img { width:100%; border-radius:8px; aspect-ratio:3/2; object-fit:cover; display:block; }
+  .gallery img { width:100%; height:auto; border-radius:8px; aspect-ratio:3/2; object-fit:cover; display:block; }
 
   /* venue */
-  .floor { width:100%; border-radius:8px; border:1px solid var(--line); display:block; margin:0 0 14px; background:#fff; }
+  .floor { width:100%; height:auto; border-radius:8px; border:1px solid var(--line); display:block; margin:0 0 14px; background:#fff; }
   .specs { font-size:.86rem; color:#5f574a; }
   .specs dt { font-weight:600; color:var(--ink); margin-top:8px; }
   .specs dd { margin:0 0 2px; }
@@ -83,11 +93,17 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#top">カフェ・ド・シュロ ギャラリー</a>
+    <a class="cta" href="#apply">申し込みはこちら</a>
+  </div>
+</header>
+<div class="wrap" id="top">
 
   <!-- HERO + INTRO -->
   <div class="card" style="padding:0; overflow:hidden;">
-    <img class="hero" src="exhibition.jpg" alt="ギャラリー展示の様子">
+    <img class="hero" src="exhibition.jpg" alt="ギャラリー展示の様子" width="1400" height="934" fetchpriority="high">
     <div style="padding:22px 20px;">
       <h1>カフェ・ド・シュロ ギャラリー</h1>
       <p class="lead">展示・イベント・お稽古・個人練習にご利用いただける多目的スペースです。グランドピアノ（スタインウェイ S-155）を備えています。</p>
@@ -101,17 +117,17 @@
   <div class="card">
     <h2>スペースの様子</h2>
     <div class="gallery">
-      <img src="piano-steinway.jpg" alt="スタインウェイ S-155">
-      <img src="event-rakugo.jpg" alt="寄席・イベントの様子">
-      <img src="lesson-dance.jpg" alt="お稽古・ワークショップの様子">
-      <img src="room-wide.jpg" alt="展示室の全景">
+      <img src="piano-steinway.jpg" alt="スタインウェイ S-155" width="900" height="675" loading="lazy" decoding="async">
+      <img src="event-rakugo.jpg" alt="寄席・イベントの様子" width="900" height="675" loading="lazy" decoding="async">
+      <img src="lesson-dance.jpg" alt="お稽古・ワークショップの様子" width="900" height="600" loading="lazy" decoding="async">
+      <img src="room-wide.jpg" alt="展示室の全景" width="900" height="600" loading="lazy" decoding="async">
     </div>
   </div>
 
   <!-- VENUE -->
   <div class="card">
     <h2>会場のご案内</h2>
-    <img class="floor" src="floor-plan.png" alt="ギャラリー平面図">
+    <img class="floor" src="floor-plan.png" alt="ギャラリー平面図" width="1195" height="896" loading="lazy" decoding="async">
     <dl class="specs">
       <dt>広さ・天井高</dt>
       <dd>床面積 約31.6㎡ / 天井高 2200mm（柱間 正面6008mm・右面5200mm）</dd>
@@ -152,7 +168,7 @@
   </div>
 
   <!-- FORM -->
-  <div class="card">
+  <div class="card" id="apply">
     <div id="formArea">
       <h2>ご利用希望・お問い合わせ</h2>
 
